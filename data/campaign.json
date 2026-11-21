@@ -1,0 +1,52 @@
+{
+  "goal": 100000,
+  "currency": "EUR",
+  "launchDate": "",
+  "author": "ケンInsane",
+  "render": "assets/render.svg",
+  "links": {
+    "kofi": "",
+    "stripe": "",
+    "tiktok": "",
+    "telegram": "https://t.me/kagami_no_naka",
+    "youtube": "https://www.youtube.com/@kxxinsane",
+    "instagram": "https://www.instagram.com/ins4neken/",
+    "gumroad": "https://ins4ne.gumroad.com/"
+  },
+  "text": {
+    "ru": {
+      "project": "Рендер квартиры",
+      "eyebrow": "Социальный эксперимент CGI-художника",
+      "title": "Интернет рендерит мне квартиру",
+      "lead": "Я CGI-художник. Я смоделировал квартиру, которую хочу, и поставил её на рендер. Каждые {bucket} поддержки проявляют один квадратик картинки. Всего их {cells}.",
+      "about": [
+        "Я делаю 3D, рекламу и визуальные эффекты. Я могу построить в компьютере любую квартиру, а купить настоящую не могу: заказов становится меньше, цены на жильё не падают.",
+        "Поэтому я проверяю, на что способен интернет. Если тысячи людей дадут по евро-два, получится сумма, которую я не накоплю за десять лет.",
+        "Каждый день я выкладываю выпуск: сколько собрано, сколько людей, сколько квадратиков проявилось. Все цифры открытые и есть на этой странице."
+      ],
+      "city": "",
+      "goalMeaning": "",
+      "fundsUse": "Только на покупку квартиры. Каждая новая сумма появляется в ленте обновлений.",
+      "ifNotReached": "Всё собранное всё равно пойдёт на жильё: на первый взнос или ремонт. Отчёт будет здесь же.",
+      "proof": "Раз в неделю я показываю в ролике экран Ko-fi с суммой. Ссылки на все выпуски есть в ленте.",
+      "milestones": ["Первый процент", "5%", "10%: CGI-работа для всех, кто здесь", "Четверть", "Половина", "Ключи"]
+    },
+    "en": {
+      "project": "Rendering a Home",
+      "eyebrow": "A social experiment by a CGI artist",
+      "title": "The internet is rendering my home",
+      "lead": "I'm a CGI artist. I modeled the apartment I want and put it on the render queue. Every {bucket} of support reveals one bucket of the image. There are {cells} of them.",
+      "about": [
+        "I make 3D, commercials and visual effects. I can build any apartment in a computer, but I can't buy a real one: there is less work every month and housing prices aren't going down.",
+        "So I'm testing what the internet can do. If thousands of people give a euro or two, it adds up to more than I could save in ten years.",
+        "Every day I post an episode: how much came in, how many people, how many buckets appeared. All numbers are public and live on this page."
+      ],
+      "city": "",
+      "goalMeaning": "",
+      "fundsUse": "Only the apartment purchase. Every new amount shows up in the update log.",
+      "ifNotReached": "Everything raised still goes to housing: a down payment or renovation. The report will be right here.",
+      "proof": "Once a week I show the Ko-fi dashboard with the total in an episode. Every episode is linked in the update log.",
+      "milestones": ["First percent", "5%", "10%: a CGI piece for everyone here", "A quarter", "Halfway", "Keys"]
+    }
+  }
+}

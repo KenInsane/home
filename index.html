@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Рендер квартиры</title>
+<meta name="description" content="CGI-художник рендерит себе квартиру на деньги интернета. Каждые €250 проявляют один квадратик картинки.">
+<meta property="og:title" content="Интернет рендерит мне квартиру">
+<meta property="og:description" content="CGI-художник рендерит себе квартиру на деньги интернета. Все цифры открытые.">
+<meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0C0E'/%3E%3Crect x='6' y='6' width='9' height='9' fill='%23F3D9B1'/%3E%3Crect x='17' y='6' width='9' height='9' fill='%23F3D9B1' opacity='.45'/%3E%3Crect x='6' y='17' width='9' height='9' fill='%23F3D9B1' opacity='.45'/%3E%3Cpath d='M17 17h4v1.5h-2.5V21H17zM26 26h-4v-1.5h2.5V22H26z' fill='%23F3D9B1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-in">
+    <span class="mark"><i></i><b data-c="project">Рендер квартиры</b></span>
+    <button class="lang" id="lang" type="button" aria-label="Switch language">EN</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow" data-c="eyebrow"></p>
+    <h1 data-c="title"></h1>
+    <p class="lead" id="lead"></p>
+  </section>
+
+  <section class="wrap" aria-label="Render">
+    <figure class="vfb">
+      <div class="vfb-top"><span id="vfb-file">apartment_final.exr</span><span id="vfb-res">2500 × 1600 · 400 buckets</span></div>
+      <div class="vfb-frame" id="frame">
+        <img id="clay" alt="" src="assets/render.svg">
+        <canvas id="buf" aria-hidden="true"></canvas>
+        <div class="bucket" id="bucket" hidden><i></i><i></i><i></i><i></i><span class="fill" id="bucket-fill"></span></div>
+      </div>
+      <figcaption class="vfb-bot"><span id="vfb-status"></span><span id="vfb-next"></span></figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap support">
+    <div class="nums" id="nums"></div>
+    <div class="cta">
+      <a class="btn primary" id="kofi" href="#" target="_blank" rel="noopener"></a>
+      <a class="btn" id="stripe" href="#" target="_blank" rel="noopener" hidden></a>
+      <p class="small" id="cta-note"></p>
+    </div>
+  </section>
+
+  <section class="wrap sec">
+    <h2 data-t="milestones"></h2>
+    <ol class="ladder" id="ladder"></ol>
+  </section>
+
+  <section class="wrap sec">
+    <h2 data-t="about"></h2>
+    <div class="prose" id="about"></div>
+  </section>
+
+  <section class="wrap sec">
+    <h2 data-t="updates"></h2>
+    <ol class="log" id="log"></ol>
+  </section>
+
+  <section class="wrap sec">
+    <h2 data-t="faq"></h2>
+    <div class="faq" id="faq"></div>
+  </section>
+
+  <section class="wrap sec">
+    <h2 data-t="follow"></h2>
+    <div class="links" id="links"></div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p id="foot"></p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
