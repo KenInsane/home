@@ -7,16 +7,16 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 const UI = {
   ru: {
     raised: "Собрано", of: "из", supporters: "Поддержали", buckets: "Квадратики", day: "День эксперимента",
-    soonDay: "старт скоро", people: "человек", toBucket: "до следующего квадратика", toMilestone: "до следующей вехи",
-    kofi: "Поддержать на Ko-fi", stripe: "Картой через Stripe", soon: "Кнопка появится в день запуска",
+    soonDay: "", since: d => `с ${d}`, people: "человек", toBucket: "до следующего квадратика", toMilestone: "до следующей вехи",
+    kofi: "Поддержать на Ko-fi", stripe: "Картой через Stripe", soon: "Оплата скоро заработает",
     ctaNote: "Любая сумма, хоть €1. Ko-fi принимает карты, Apple Pay, Google Pay и PayPal.",
     top: "Топ поддержки", recent: "Последние", anon: "Аноним", lead: "Главный спонсор рендера",
-    emptyTop: "Здесь появятся первые имена после запуска.",
+    emptyTop: "Пока здесь пусто. Стань первым в топе.",
     beat: m => `Чтобы обойти №1, нужно больше ${m} за всё время.`,
     topNote: "Имя берётся из Ko-fi. Не хотите светиться — отметьте поддержку как приватную. Место в топе — это благодарность, без призов. Донатьте только то, что не жалко: каждый евро двигает рендер одинаково.",
     bucketsOf: (x, f) => { const w = { one: "квадратик", few: "квадратика", many: "квадратиков" }[new Intl.PluralRules("ru-RU").select(x)] || "квадратика"; return `≈ ${f} ${w}`; },
     milestones: "Вехи", about: "Зачем это всё", updates: "Лента обновлений", faq: "Вопросы", follow: "Мои социальные сети",
-    noUpdates: "Первое обновление появится в день запуска.", watch: "смотреть выпуск",
+    noUpdates: "Обновления появятся здесь.", watch: "смотреть выпуск",
     rendering: (p, b) => `Рендерю… ${p} · ${b} / ${CELLS}`, finished: "Рендер завершён", perBucket: b => `1 квадратик = ${b}`,
     bucketsLeft: n => `осталось ${n}`, dayN: n => `День ${n}`,
     faqItems: c => [
@@ -32,16 +32,16 @@ const UI = {
   },
   en: {
     raised: "Raised", of: "of", supporters: "Supporters", buckets: "Buckets", day: "Experiment day",
-    soonDay: "starting soon", people: "people", toBucket: "to the next bucket", toMilestone: "to the next milestone",
-    kofi: "Support on Ko-fi", stripe: "Pay by card with Stripe", soon: "The button goes live on launch day",
+    soonDay: "", since: d => `since ${d}`, people: "people", toBucket: "to the next bucket", toMilestone: "to the next milestone",
+    kofi: "Support on Ko-fi", stripe: "Pay by card with Stripe", soon: "Payments open soon",
     ctaNote: "Any amount, even €1. Ko-fi takes cards, Apple Pay, Google Pay and PayPal.",
     top: "Top supporters", recent: "Latest", anon: "Anonymous", lead: "Lead render sponsor",
-    emptyTop: "The first names appear here after launch.",
+    emptyTop: "Nobody here yet. Be the first in the top.",
     beat: m => `To pass #1, give more than ${m} in total.`,
     topNote: "Names come from Ko-fi. Prefer to stay anonymous? Mark your support as private. A spot in the top is a thank-you only, no prizes. Give only what you can spare: every euro moves the render the same.",
     bucketsOf: (x, f) => `≈ ${f} ${x === 1 ? "bucket" : "buckets"}`,
     milestones: "Milestones", about: "Why this exists", updates: "Update log", faq: "Questions", follow: "My social media",
-    noUpdates: "The first update appears on launch day.", watch: "watch the episode",
+    noUpdates: "Updates will appear here.", watch: "watch the episode",
     rendering: (p, b) => `Rendering… ${p} · ${b} / ${CELLS}`, finished: "Render complete", perBucket: b => `1 bucket = ${b}`,
     bucketsLeft: n => `${n} left`, dayN: n => `Day ${n}`,
     faqItems: c => [
@@ -147,7 +147,7 @@ function render(animate) {
     <div class="num big"><span>${esc(t.raised)}</span><b>${esc(money(R))} <small>${esc(t.of)} ${esc(money(G))}</small></b><div class="meter"><i style="width:${Math.min(100, pct).toFixed(2)}%"></i></div><small>${esc(pctTxt)}</small></div>
     <div class="num"><span>${esc(t.supporters)}</span><b>${L && L.supporters != null ? int(L.supporters) : "0"}</b><small>${esc(t.people)}</small></div>
     <div class="num"><span>${esc(t.buckets)}</span><b>${full}</b><small>${esc(t.bucketsLeft(CELLS - full))}</small></div>
-    <div class="num"><span>${esc(t.day)}</span><b>${day != null && day >= 1 ? day : "—"}</b><small>${day != null && day >= 1 ? esc(dateFmt(st.c.launchDate)) : esc(t.soonDay)}</small></div>
+    <div class="num"><span>${esc(t.day)}</span><b>${day != null && day >= 1 ? day : "—"}</b><small>${day != null && day >= 1 ? esc(t.since(dateFmt(st.c.launchDate))) : esc(t.soonDay)}</small></div>
     <div class="num"><span>${esc(t.toMilestone)}</span><b>${esc(money(Math.max(0, nextMilestone() - R)))}</b><small>${esc(money(nextMilestone()))}</small></div>`;
 
   const k = $("#kofi"), lk = st.c.links || {};
