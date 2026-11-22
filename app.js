@@ -25,7 +25,7 @@ const UI = {
       ["Это инвестиция? Я что-то получу взамен?", "Нет. Это добровольная поддержка. Я ничего не обещаю взамен: ни долю в квартире, ни возврат денег."],
       ["Какие комиссии?", "Ko-fi не берёт комиссию с разовой поддержки. Платёжная система (Stripe или PayPal) удерживает свою, обычно несколько процентов. В ленте указана сумма до комиссий."],
       ["Как проверить, что цифры настоящие?", c.proof],
-      ["Почему квадратики?", `Так считают картинку рендеры вроде V-Ray: по кусочкам, бакетами. Здесь каждый бакет оплачивают люди, а не видеокарта. Один квадратик = {bucket}.`]
+      ["Почему картинка открывается кусочками?", `Так сразу видно, сколько уже собрано. Один кусочек = {bucket}, всего их ${CELLS}.`]
     ],
     links: { tiktok: "TikTok", telegram: "Telegram", youtube: "YouTube", instagram: "Instagram", gumroad: "Купить мои 3D-ассеты" },
     foot: a => `${a}. Это добровольная поддержка, а не инвестиция и не покупка. Цифры обновляются вручную после каждого выпуска.`
@@ -50,7 +50,7 @@ const UI = {
       ["Is this an investment? Do I get anything back?", "No. This is voluntary support. I promise nothing in return: no share of the apartment and no refunds."],
       ["What are the fees?", "Ko-fi takes no fee on one-off support. The payment processor (Stripe or PayPal) keeps its own, usually a few percent. The log shows amounts before fees."],
       ["How can I check the numbers are real?", c.proof],
-      ["Why buckets?", `That's how renderers like V-Ray compute an image: piece by piece, in buckets. Here people pay for each bucket instead of a graphics card. One bucket = {bucket}.`]
+      ["Why does the picture open piece by piece?", `So you can see at a glance how much is raised. One piece = {bucket}, ${CELLS} in total.`]
     ],
     links: { tiktok: "TikTok", telegram: "Telegram", youtube: "YouTube", instagram: "Instagram", gumroad: "Buy my 3D assets" },
     foot: a => `${a}. This is voluntary support, not an investment or a purchase. Numbers are updated by hand after each episode.`
