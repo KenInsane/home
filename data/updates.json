@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "date": "2026-11-22",
+    "raised": 0,
+    "supporters": 0,
+    "note": {
+      "ru": "Сбор открыт. Рендер квартиры начинается с нуля.",
+      "en": "The fundraiser is open. The render starts from zero."
+    },
+    "video": ""
+  }
+]
