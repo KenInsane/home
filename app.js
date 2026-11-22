@@ -10,6 +10,11 @@ const UI = {
     soonDay: "старт скоро", people: "человек", toBucket: "до следующего квадратика", toMilestone: "до следующей вехи",
     kofi: "Поддержать на Ko-fi", stripe: "Картой через Stripe", soon: "Кнопка появится в день запуска",
     ctaNote: "Любая сумма, хоть €1. Ko-fi принимает карты, Apple Pay, Google Pay и PayPal.",
+    top: "Топ поддержки", recent: "Последние", anon: "Аноним", lead: "Главный спонсор рендера",
+    emptyTop: "Здесь появятся первые имена после запуска.",
+    beat: m => `Чтобы обойти №1, нужно больше ${m} за всё время.`,
+    topNote: "Имя берётся из Ko-fi. Не хотите светиться — отметьте поддержку как приватную. Место в топе — это благодарность, без призов. Донатьте только то, что не жалко: каждый евро двигает рендер одинаково.",
+    bucketsOf: (x, f) => { const w = { one: "квадратик", few: "квадратика", many: "квадратиков" }[new Intl.PluralRules("ru-RU").select(x)] || "квадратика"; return `≈ ${f} ${w}`; },
     milestones: "Вехи", about: "Зачем это всё", updates: "Лента обновлений", faq: "Вопросы", follow: "Следить за экспериментом",
     noUpdates: "Первое обновление появится в день запуска.", watch: "смотреть выпуск",
     rendering: (p, b) => `Рендерю… ${p} · ${b} / ${CELLS}`, finished: "Рендер завершён", perBucket: b => `1 квадратик = ${b}`,
@@ -30,6 +35,11 @@ const UI = {
     soonDay: "starting soon", people: "people", toBucket: "to the next bucket", toMilestone: "to the next milestone",
     kofi: "Support on Ko-fi", stripe: "Pay by card with Stripe", soon: "The button goes live on launch day",
     ctaNote: "Any amount, even €1. Ko-fi takes cards, Apple Pay, Google Pay and PayPal.",
+    top: "Top supporters", recent: "Latest", anon: "Anonymous", lead: "Lead render sponsor",
+    emptyTop: "The first names appear here after launch.",
+    beat: m => `To pass #1, give more than ${m} in total.`,
+    topNote: "Names come from Ko-fi. Prefer to stay anonymous? Mark your support as private. A spot in the top is a thank-you only, no prizes. Give only what you can spare: every euro moves the render the same.",
+    bucketsOf: (x, f) => `≈ ${f} ${x === 1 ? "bucket" : "buckets"}`,
     milestones: "Milestones", about: "Why this exists", updates: "Update log", faq: "Questions", follow: "Follow the experiment",
     noUpdates: "The first update appears on launch day.", watch: "watch the episode",
     rendering: (p, b) => `Rendering… ${p} · ${b} / ${CELLS}`, finished: "Render complete", perBucket: b => `1 bucket = ${b}`,
@@ -153,6 +163,21 @@ function render(animate) {
     return `<li class="${cls}"><b>${esc(money(v))}</b><span>${esc(name)}</span></li>`;
   }).join("");
 
+  const D = st.donors || { top: [], recent: [] };
+  const bucketsTxt = total => {
+    const x = total / bucketValue(), r = x >= 10 ? Math.round(x) : Math.round(x * 10) / 10;
+    if (r <= 0) return "";
+    return t.bucketsOf(r, r.toLocaleString(st.lang === "ru" ? "ru-RU" : "en-GB"));
+  };
+  $("#top").innerHTML = D.top.length ? D.top.map((p, i) => `<li class="${i === 0 ? "first" : ""}">
+      <span class="rk">${String(i + 1).padStart(2, "0")}</span>
+      <span class="nm">${esc(p.name)}<small>${esc([i === 0 ? t.lead : "", bucketsTxt(p.total)].filter(Boolean).join(" · "))}</small></span>
+      <span class="am">${esc(money(p.total))}</span></li>`).join("")
+    : `<li class="empty">${esc(t.emptyTop)}</li>`;
+  $("#recent").innerHTML = (D.recent || []).map(r => `<li><span>${esc(r.name || t.anon)}</span><span>${esc(money(r.amount))}</span></li>`).join("")
+    || `<li><span class="small">—</span><span></span></li>`;
+  $("#top-note").textContent = (D.top.length ? t.beat(money(D.top[0].total)) + " " : "") + t.topNote;
+
   $("#about").innerHTML = (c.about || []).map(p => `<p>${esc(fill(p))}</p>`).join("");
 
   if (!st.updates.length) $("#log").innerHTML = `<li><span class="empty">${esc(t.noUpdates)}</span></li>`;
@@ -188,9 +213,11 @@ $("#clay").addEventListener("load", () => paint(st.shown));
 
 Promise.all([
   fetch("data/campaign.json", { cache: "no-store" }).then(r => r.json()),
-  fetch("data/updates.json", { cache: "no-store" }).then(r => r.json())
-]).then(([c, u]) => {
+  fetch("data/updates.json", { cache: "no-store" }).then(r => r.json()),
+  fetch("data/donors.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null)
+]).then(([c, u, d]) => {
   st.c = c;
+  st.donors = { top: Array.isArray(d?.top) ? d.top : [], recent: Array.isArray(d?.recent) ? d.recent : [] };
   st.updates = (Array.isArray(u) ? u : []).filter(x => x && x.date).sort((a, b) => a.date.localeCompare(b.date));
   if (c.render) $("#clay").src = c.render;
   render(true);
